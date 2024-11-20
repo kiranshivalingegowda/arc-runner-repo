@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  say_hello:
+  docker-build:
     runs-on:  demo-dind-runner
 
     steps:
