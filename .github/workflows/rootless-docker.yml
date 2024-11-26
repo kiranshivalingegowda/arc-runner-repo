@@ -9,10 +9,10 @@ on:
 
 jobs:
   container-test-job:
-    runs-on: ubuntu-latest
+    runs-on: dind-rootless-runner
     #runs-on: ubuntu-latest
     container:
-      image: node:18
+      image: busybox
     steps:
       - name: Check for dockerenv file
         run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
