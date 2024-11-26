@@ -12,10 +12,10 @@ jobs:
     runs-on: dind-rootless-runner
     #runs-on: ubuntu-latest
     container:
-      image: mgoltzsche/podman
+      image: anatomicjc/buildah
     steps:
       - name: Validating docker as rootless
-        run: podman version
+        run: buildah version
         
   
   #     env:
