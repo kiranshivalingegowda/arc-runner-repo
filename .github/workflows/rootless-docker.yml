@@ -12,10 +12,10 @@ jobs:
     runs-on: dind-rootless-runner
     #runs-on: ubuntu-latest
     container:
-      image: busybox
+      image: mgoltzsche/podman
     steps:
       - name: Validating docker as rootless
-        run: docker info
+        run: podman version
         
   
   #     env:
