@@ -15,7 +15,7 @@ jobs:
       image: ghcr.io/actions-runner-controller/actions-runner-controller/actions-runner-dind-rootless
     steps:
       - name: Validating docker as rootless
-        run: whoami
+        run: docker info
         
   
   #     env:
