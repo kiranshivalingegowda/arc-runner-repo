@@ -2,16 +2,19 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: Runner
 metadata:
-  name: kiran-dind-rootless
+  name: dind-rootless-runner
 spec:
   repository: kiranshivalingegowda/arc-runner-repo
   containerMode: kubernetes
-  serviceAccountName: my-service-account
+  serviceAccountName: dind-rootless-sa
+    #serviceAccountName: actions-runner-controller
+  labels:
+   - dind-rootless-runner
   workVolumeClaimTemplate:
-    storageClassName: "my-dynamic-storage-class"
+    storageClassName: "azuredisk-premium-retain"
     accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
     resources:
       requests:
-        storage: 10Gi
+        storage: 1Gi
   env: []
