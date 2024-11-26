@@ -15,7 +15,7 @@ jobs:
       image: anatomicjc/buildah
     steps:
       - name: Validating docker as rootless
-        run: buildah version
+        run: buildah images
         
   
   #     env:
