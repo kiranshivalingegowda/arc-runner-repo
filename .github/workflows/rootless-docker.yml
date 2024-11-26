@@ -14,8 +14,9 @@ jobs:
     container:
       image: busybox
     steps:
-      - name: Check for dockerenv file
-        run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
+      - name: Validating docker as rootless
+        run: docker info
+        
   
   #     env:
   #       NODE_ENV: development
