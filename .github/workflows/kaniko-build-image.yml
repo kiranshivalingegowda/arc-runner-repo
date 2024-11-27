@@ -45,7 +45,7 @@ jobs:
             --context="${{ github.repositoryUrl }}#${{ github.ref }}#${{ github.sha }}"  \
             --destination="$ACR_URL/busybox:latest" \
             ${{ env.KANIKO_CACHE_ARGS }} \
-            --push-retry 5 
+            --push-retry 5 --skip-push-permission-check
         env:  # needed to auth to github and download the repo and to authenticate to ACR via Azure Service Principal
           AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
