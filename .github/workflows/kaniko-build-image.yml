@@ -20,6 +20,8 @@ jobs:
       packages: write # to push to GHCR, omit for other container registry. https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#publishing-a-package-using-an-action
 
     steps:
-      - name: Build and Push Image to GHCR with kaniko
-        run: pwd
+      - name: Build Image
+        run: |
+          pwd 
+          /kaniko/executor --help
  
