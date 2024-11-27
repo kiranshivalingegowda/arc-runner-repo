@@ -7,7 +7,6 @@ on:
     branches: none # [ main ]
   workflow_dispatch:
 
-jobs:
 env:
   KANIKO_CACHE_ARGS: "--cache=true --cache-copy-layers=true --cache-ttl=24h"
 
