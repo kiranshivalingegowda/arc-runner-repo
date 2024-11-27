@@ -26,35 +26,30 @@ jobs:
           ls -ltra /
  
 
-
-  build-to-docker-hub:
+  build-to-acr:
     runs-on: arc-runner-set # uses self-hosted runner scale set
     needs: build-docker-img
     container:
-      image: gcr.io/kaniko-project/executor:v1.20.0-debug 
+      image: gcr.io/kaniko-project/executor:v1.20.0-debug # the kaniko image
     permissions:
       contents: read # read the repository
 
     steps:
-      - name: Build and Push Image to docker registry with kaniko
+      - name: Build and Push Image to ACR with kaniko
         run: |
           cat <<EOF > /kaniko/.docker/config.json
-          {
-            "auths": {
-              "demoacrkiran.azurecr.io": {
-                "auth": "$(echo -n "demoacrkiran:${{ secrets.ACR_SECRET }}"| base64 )"
-              }
-            }
-          }
+          { "credHelpers": { "${{ env.ACR_URL }}": "acr-env" } }
           EOF
 
-          /kaniko/executor --dockerfile="./docker-images/busybox/Dockerfile" \
+          /kaniko/executor --dockerfile="./app/Dockerfile" \
             --context="${{ github.repositoryUrl }}#${{ github.ref }}#${{ github.sha }}"  \
-            --destination="$DOCKER_IMAGE_NAME:$(echo ${GITHUB_SHA} | head  -c 7)" \
+            --destination="$ACR_URL/<namespace>/nginx:$(echo ${GITHUB_SHA} | head  -c 7)" \
             ${{ env.KANIKO_CACHE_ARGS }} \
             --push-retry 5 
-        env: 
+        env:  # needed to auth to github and download the repo and to authenticate to ACR via Azure Service Principal
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           GIT_USERNAME: ${{ github.actor }}
           GIT_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          DOCKER_IMAGE_NAME: "demoacrkiran.azurecr.io/samples/busybox"
-          ACR_SECRET: ${{ secrets.ACR_SECRET }}
+          ACR_URL: "demoacrkiran.azurecr.io"
