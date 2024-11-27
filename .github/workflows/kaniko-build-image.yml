@@ -41,8 +41,8 @@ jobs:
           cat <<EOF > /kaniko/.docker/config.json
           {
             "auths": {
-              "https://index.docker.io/v1/": {
-                "auth": "$(echo -n "kiran.shivaling@gmail.com:${{ secrets.DOCKER_PASSWORD }}" | base64 )"
+              "demoacrkiran.azurecr.io": {
+                "auth": "$(echo -n "demoacrkiran:${{ACR_SECRET}}"| base64 )"
               }
             }
           }
@@ -56,4 +56,5 @@ jobs:
         env: 
           GIT_USERNAME: ${{ github.actor }}
           GIT_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          DOCKER_IMAGE_NAME: "kiranshivalingdocker/arcrepo/arcdemo"
+          DOCKER_IMAGE_NAME: "demoacrkiran.azurecr.io/samples/busybox"
+          ACR_SECRET: ${{ secrets.ACR_SECRET }}
