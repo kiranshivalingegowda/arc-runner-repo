@@ -42,7 +42,7 @@ jobs:
           {
             "auths": {
               "demoacrkiran.azurecr.io": {
-                "auth": "$(echo -n "demoacrkiran:${{ACR_SECRET}}"| base64 )"
+                "auth": "$(echo -n "demoacrkiran:${{ ACR_SECRET }}"| base64 )"
               }
             }
           }
