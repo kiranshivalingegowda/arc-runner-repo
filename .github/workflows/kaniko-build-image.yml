@@ -41,9 +41,9 @@ jobs:
           { "credHelpers": { "${{ env.ACR_URL }}": "acr-env" } }
           EOF
 
-          /kaniko/executor --dockerfile="./docker-images/busybox/Dockerfile" \
+          /kaniko/executor --dockerfile="./docker-images/ubuntu/Dockerfile" \
             --context="${{ github.repositoryUrl }}#${{ github.ref }}#${{ github.sha }}"  \
-            --destination="$ACR_URL/busybox:latest" \
+            --destination="$ACR_URL/ubuntu:latest" \
             ${{ env.KANIKO_CACHE_ARGS }} \
             --push-retry 5 
         env:  # needed to auth to github and download the repo and to authenticate to ACR via Azure Service Principal
