@@ -41,7 +41,7 @@ jobs:
           { "credHelpers": { "${{ env.ACR_URL }}": "acr-env" } }
           EOF
 
-          /kaniko/executor --dockerfile="./app/Dockerfile" \
+          /kaniko/executor --dockerfile="./docker-images/busybox/Dockerfile" \
             --context="${{ github.repositoryUrl }}#${{ github.ref }}#${{ github.sha }}"  \
             --destination="$ACR_URL/demo/nginx:$(echo ${GITHUB_SHA} | head  -c 7)" \
             ${{ env.KANIKO_CACHE_ARGS }} \
