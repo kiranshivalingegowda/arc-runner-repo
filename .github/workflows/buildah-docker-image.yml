@@ -28,6 +28,8 @@ jobs:
           cd ./docker-images/ubuntu/
           pwd
           ls -ltra
+          buildah bud -t demoimg .
+          buildah images
 
  
 
