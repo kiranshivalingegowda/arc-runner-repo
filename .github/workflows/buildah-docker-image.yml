@@ -28,7 +28,7 @@ jobs:
           cd ./docker-images/ubuntu/
           pwd
           ls -ltra
-          buildah bud -t demoimg .
+          buildah bud -t demoimg . --root /__w/arc-runner-repo/arc-runner-repo --storage-driver vfs
           buildah images
 
  
