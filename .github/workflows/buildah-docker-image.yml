@@ -22,8 +22,10 @@ jobs:
       - name: Build Image
         run: |
           buildah --help
+          cd ./docker-images/ubuntu/
           pwd
-          ls -ltar
+          ls -ltra
+
  
 
   # build-to-acr:
