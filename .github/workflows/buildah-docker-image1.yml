@@ -1,4 +1,4 @@
-name: Buildah Docker image1
+name: Buildah Rootless Docker
 on:
   push:
     branches: none # [ main ]
