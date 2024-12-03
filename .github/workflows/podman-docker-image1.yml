@@ -24,7 +24,7 @@ jobs:
     
       - name: Build Image
         run: |
-          podman --help
+          #podman --help
           echo "======================================="
           whoami
           ls -ltra
