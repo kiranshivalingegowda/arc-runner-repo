@@ -13,7 +13,7 @@ jobs:
   build-docker-img:
     runs-on: arc-runner-set # uses self-hosted runner scale set
     container:
-      image: misafidiniaina/buildah-rootless
+      image: gregorystephensen/buildahrootless
     permissions:
       contents: read # read the repository
       packages: write # to push to GHCR, omit for other container registry. https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#publishing-a-package-using-an-action
@@ -24,6 +24,10 @@ jobs:
     
       - name: Build Image
         run: |
+          echo "===================================================="
+          whoami
+          id
+          echo "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
           buildah --help
           cd ./docker-images/ubuntu/
           pwd
