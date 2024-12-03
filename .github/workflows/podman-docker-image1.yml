@@ -25,8 +25,13 @@ jobs:
       - name: Build Image
         run: |
           podman --help
-          cd ./docker-images/ubuntu/
-          pwd
+          echo "======================================="
+          whoami
           ls -ltra
-          podman build -t myapp:latest .
-          podman images
+          id
+          
+          # cd ./docker-images/ubuntu/
+          # pwd
+          # ls -ltra
+          # podman build -t myapp:latest .
+          # podman images
