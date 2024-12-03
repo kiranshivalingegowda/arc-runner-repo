@@ -1,0 +1,32 @@
+name: Buildah Docker image1
+on:
+  push:
+    branches: none # [ main ]
+  pull_request:
+    branches: none # [ main ]
+  workflow_dispatch:
+
+env:
+  Buildargs: "nan"
+  
+jobs:
+  build-docker-img:
+    runs-on: arc-runner-set # uses self-hosted runner scale set
+    container:
+      image: uig17220/buildah-rootless
+    permissions:
+      contents: read # read the repository
+      packages: write # to push to GHCR, omit for other container registry. https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#publishing-a-package-using-an-action
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+    
+      - name: Build Image
+        run: |
+          buildah --help
+          cd ./docker-images/ubuntu/
+          pwd
+          ls -ltra
+          buildah bud -t demoimg . 
+          buildah images
