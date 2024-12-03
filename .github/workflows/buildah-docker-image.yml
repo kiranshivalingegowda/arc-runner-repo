@@ -24,14 +24,11 @@ jobs:
     
       - name: Build Image
         run: |
-          whoami
-          id
-          buildah --help
           cd ./docker-images/ubuntu/
           pwd
           ls -ltra
           buildah bud --security-opt apparmor=unconfined -t demoimg . 
-          buildah images
+          
 
  
 
