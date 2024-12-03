@@ -26,7 +26,8 @@ jobs:
         run: |
           cd ./docker-images/ubuntu/
           #buildah bud --security-opt apparmor=unconfined -t demoimg . 
-          buildah --storage-driver vfs bud --security-opt apparmor=unconfined  -t demoimg . 
+          buildah --storage-driver vfs bud --security-opt apparmor=unconfined  -t demoimg .
+          sleep 10000000
           
 
  
