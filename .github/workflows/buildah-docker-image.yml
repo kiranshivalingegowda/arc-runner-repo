@@ -13,7 +13,7 @@ jobs:
   build-docker-img:
     runs-on: arc-runner-set # uses self-hosted runner scale set
     container:
-      image: kiranshivalingdocker/demobuildah
+      image: quay.io/buildah/stable:latest
     permissions:
       contents: read # read the repository
       packages: write # to push to GHCR, omit for other container registry. https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#publishing-a-package-using-an-action
@@ -24,9 +24,9 @@ jobs:
     
       - name: Build Image
         run: |
+          whoami
+          buildah version
           cd ./docker-images/ubuntu/
-          pwd
-          ls -ltra
           #buildah bud --security-opt apparmor=unconfined -t demoimg . 
           buildah --storage-driver vfs bud --security-opt apparmor=unconfined  -t demoimg . 
           
