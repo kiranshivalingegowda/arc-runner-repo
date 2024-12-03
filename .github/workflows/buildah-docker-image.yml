@@ -24,6 +24,8 @@ jobs:
     
       - name: Build Image
         run: |
+          whoami
+          id
           buildah --help
           cd ./docker-images/ubuntu/
           pwd
