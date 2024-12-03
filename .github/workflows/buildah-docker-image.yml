@@ -27,7 +27,8 @@ jobs:
           cd ./docker-images/ubuntu/
           pwd
           ls -ltra
-          buildah bud --security-opt apparmor=unconfined -t demoimg . 
+          #buildah bud --security-opt apparmor=unconfined -t demoimg . 
+          buildah --storage-driver vfs bud --security-opt apparmor=unconfined  -t demoimg . 
           
 
  
