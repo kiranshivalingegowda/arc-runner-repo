@@ -33,6 +33,8 @@ jobs:
           id
           echo "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
           buildah --help
+          buildah pull ubuntu:latest
+          buildah images
           #cd ./docker-images/ubuntu/
           #pwd
           #ls -ltra
