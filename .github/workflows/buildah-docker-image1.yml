@@ -30,9 +30,9 @@ jobs:
         run: |
           echo "===================================================="
           #sleep 10000000
-          #whoami
-          #id
-          #echo "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          whoami
+          id
+          echo "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
           #buildah --help
           buildah pull ubuntu:latest
           buildah images
