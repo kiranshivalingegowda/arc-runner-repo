@@ -28,7 +28,7 @@ jobs:
       - name: Build Image
         run: |
           echo "===================================================="
-          sleep 10000000
+          #sleep 10000000
           #whoami
           #id
           #echo "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
