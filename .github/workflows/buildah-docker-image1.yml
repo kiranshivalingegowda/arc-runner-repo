@@ -34,7 +34,7 @@ jobs:
           #id
           #echo "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
           #buildah --help
-          buildah --storage-driver vfs pull ubuntu:latest
+          buildah pull ubuntu:latest
           buildah images
           #cd ./docker-images/ubuntu/
           #pwd
