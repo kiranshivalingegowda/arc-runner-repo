@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: buildah
+spec:
+  containers:
+  - name: buildah
+    #image: quay.io/buildah/stable:latest
+    image: kiranshivalingdocker/buildahnonroot
+    command: ["/bin/sh", "-c", "echo 'Hello, World!' && sleep 3600"]
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+        #capabilities:
+        #add:
+        #- CAP_SETGID
+        #- CAP_SETUID
+        #appArmorProfile:
+        #type: Unconfined
+
+    volumeMounts:
+    - name: buildah-storage
+      mountPath: /var/lib/containers
+  volumes:
+  - name: buildah-storage
+    emptyDir: {}

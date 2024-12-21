@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: no-priv
+spec:
+ containers:
+   - name: no-priv
+     image: kiranshivalingdocker/podmannotroot
+     args:
+       - sleep
+       - "1000000"
+     securityContext:
+       runAsUser: 1000
+         #volumeMounts:
+         #- mountPath: /home/podman/.local/share/containers
+         #name: podman-local
+         # volumes:
+         #- name: podman-local
+         #hostPath:
+         #path: /home/mvmadmin/workspaces/podman-testing
