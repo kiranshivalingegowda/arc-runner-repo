@@ -1,4 +1,4 @@
-name: Hello World
+name: Bootc ISO builder - local
 
 on:
   push:
