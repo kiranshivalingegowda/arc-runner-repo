@@ -12,7 +12,7 @@ jobs:
     runs-on: bootc-runner-scale-set
     container:
      image: ubuntu:22.04
-       #options: --privileged
+     options: --privileged
     permissions:
       contents: read
       packages: write 
