@@ -7,13 +7,27 @@ on:
     branches: none # [ main ]
   workflow_dispatch:
 
+# jobs:
+#   say_hello:
+#     runs-on: bootc-runner-scale-set
+
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v3
+
+#     - name: Print Hello World
+#       run: echo "Hello World"
+
+
+
 jobs:
-  say_hello:
+  build:
     runs-on: bootc-runner-scale-set
-
+    container: ubuntu:22.04  # or any container image available to your runner
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: apt-get update && apt-get install -y curl
 
-    - name: Print Hello World
-      run: echo "Hello World"
+      - name: Print Hello World
+        run: echo "Hello World"
