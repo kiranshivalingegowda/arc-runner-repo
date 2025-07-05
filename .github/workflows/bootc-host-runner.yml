@@ -15,7 +15,7 @@ jobs:
 
       - name: Create ISO configuration
         run: |
-          cat > config.toml << EOF
+          cat > iso-config.toml << EOF
           [[customizations.user]]
           name = "admin"
           password = "welcome"
@@ -26,3 +26,19 @@ jobs:
           minsize = "10 GiB"
           EOF
 
+      - name: Build ISO
+        id: build-iso
+        uses: osbuild/bootc-image-builder-action@v0.0.2
+        with:
+          config-file: ./iso-config.toml
+          image: quay.io/fedora/fedora-minimal:latest
+          types: |
+            iso
+            vmdk
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: iso
+          path: ${{ steps.build-iso.outputs.output-directory }}
+          if-no-files-found: error
