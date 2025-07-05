@@ -11,7 +11,8 @@ jobs:
   build:
     runs-on: bootc-runner-scale-set
     container:
-     image: ubuntu:22.04
+      #image: ubuntu:22.04
+     image: quay.io/podman/stable:latest
      options: --privileged
     permissions:
       contents: read
@@ -19,6 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Print Hello World
-        run: echo "Hello World"
+      - name: Podman Validation 
+        run: |
+          podman --version
+          pwd
+          ls -ltra
 

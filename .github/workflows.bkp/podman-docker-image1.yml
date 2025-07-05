@@ -1,0 +1,37 @@
+name: Podman Rootless Docker 
+on:
+  push:
+    branches: none # [ main ]
+  pull_request:
+    branches: none # [ main ]
+  workflow_dispatch:
+
+env:
+  Buildargs: "nan"
+  
+jobs:
+  build-docker-img:
+    runs-on: arc-runner-set # uses self-hosted runner scale set
+    container:
+      image: ktaraszk/podman-rootless
+    permissions:
+      contents: read # read the repository
+      packages: write # to push to GHCR, omit for other container registry. https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#publishing-a-package-using-an-action
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+    
+      - name: Build Image
+        run: |
+          #podman --help
+          echo "======================================="
+          whoami
+          ls -ltra
+          id
+          
+          # cd ./docker-images/ubuntu/
+          # pwd
+          # ls -ltra
+          # podman build -t myapp:latest .
+          # podman images

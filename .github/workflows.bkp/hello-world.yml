@@ -1,0 +1,33 @@
+name: Hello World 
+
+on:
+  push:
+    branches: none # [ main ]
+  pull_request:
+    branches: none # [ main ]
+  workflow_dispatch:
+
+# jobs:
+#   say_hello:
+#     runs-on: bootc-runner-scale-set
+
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v3
+
+#     - name: Print Hello World
+#       run: echo "Hello World"
+
+
+
+jobs:
+  build:
+    runs-on: bootc-runner-scale-set
+    container: 
+     image: busybox
+     options: --privileged
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Print Hello World
+        run: echo "Hello World"

@@ -1,0 +1,54 @@
+name: Docker as RootLess
+
+on:
+  push:
+    branches: none # [ main ]
+  pull_request:
+    branches: none # [ main ]
+  workflow_dispatch:
+
+jobs:
+  container-test-job:
+    runs-on: dind-rootless-runner
+    #runs-on: ubuntu-latest
+    container:
+      image: anatomicjc/buildah
+    steps:
+      - name: Validating docker as rootless
+        run: buildah images
+        
+  
+  #     env:
+  #       NODE_ENV: development
+  #     ports:
+  #       - 80
+  #     volumes:
+  #       - my_docker_volume:/volume_mount
+  #     options: --cpus 1
+
+
+  # docker-build:
+  #   runs-on:  dind-rootless-runner
+
+  #   steps:
+  #   - name: Checkout repository
+  #     uses: actions/checkout@v3
+
+  #   - name: Print Hello World
+  #     run: echo "Hello World"
+
+  #   - name: Set up Docker Buildx
+  #     uses: docker/setup-buildx-action@v2
+
+  #   container:
+  #     image: ubuntu:latest
+
+    # - name: Build Docker image
+    #   id: build
+    #   uses: docker/build-push-action@v3
+    #   with:
+    #    context: .
+    #    file: docker-images/busybox/Dockerfile
+    #    tags: busy-box-image
+    #    load: true
+    #    network: host

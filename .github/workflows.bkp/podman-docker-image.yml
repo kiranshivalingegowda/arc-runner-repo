@@ -1,0 +1,62 @@
+name: Podman Docker image
+on:
+  push:
+    branches: none # [ main ]
+  pull_request:
+    branches: none # [ main ]
+  workflow_dispatch:
+
+env:
+  Buildargs: "nan"
+  
+jobs:
+  build-docker-img:
+    runs-on: arc-runner-set # uses self-hosted runner scale set
+    container:
+      image: quay.io/podman/stable:latest
+    permissions:
+      contents: read # read the repository
+      packages: write # to push to GHCR, omit for other container registry. https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#publishing-a-package-using-an-action
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+    
+      - name: Build Image
+        run: |
+          podman --help
+          cd ./docker-images/ubuntu/
+          pwd
+          ls -ltra
+          podman build -t myapp:latest .
+          podman images
+
+ 
+
+  # build-to-acr:
+  #   runs-on: arc-runner-set # uses self-hosted runner scale set
+  #   needs: build-docker-img
+  #   container:
+  #     image: gcr.io/kaniko-project/executor:v1.20.0-debug # the kaniko image
+  #   permissions:
+  #     contents: read # read the repository
+
+  #   steps:
+  #     - name: Build and Push Image to ACR with kaniko
+  #       run: |
+  #         cat <<EOF > /kaniko/.docker/config.json
+  #         { "credHelpers": { "${{ env.ACR_URL }}": "acr-env" } }
+  #         EOF
+
+  #         /kaniko/executor --dockerfile="./docker-images/ubuntu/Dockerfile" \
+  #           --context="${{ github.repositoryUrl }}#${{ github.ref }}#${{ github.sha }}"  \
+  #           --destination="$ACR_URL/ubuntu:latest" \
+  #           ${{ env.KANIKO_CACHE_ARGS }} \
+  #           --push-retry 5 
+  #       env:  # needed to auth to github and download the repo and to authenticate to ACR via Azure Service Principal
+  #         AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  #         AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  #         AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  #         GIT_USERNAME: ${{ github.actor }}
+  #         GIT_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+  #         ACR_URL: "demoacrkiran.azurecr.io"
