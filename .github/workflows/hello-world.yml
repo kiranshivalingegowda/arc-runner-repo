@@ -23,11 +23,11 @@ on:
 jobs:
   build:
     runs-on: bootc-runner-scale-set
-    container: ubuntu:22.04  # or any container image available to your runner
+    container: 
+     image: busybox
+     options: --privileged
     steps:
       - uses: actions/checkout@v4
-      - name: Install dependencies
-        run: apt-get update && apt-get install -y curl
 
       - name: Print Hello World
         run: echo "Hello World"
