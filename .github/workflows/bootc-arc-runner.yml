@@ -26,6 +26,19 @@ jobs:
           pwd
           ls -ltra
 
+      - name: Create ISO configuration
+        run: |
+          cat > config.toml << EOF
+          [[customizations.user]]
+          name = "admin"
+          password = "welcome"
+          groups = ["wheel"]
+
+          [[customizations.filesystem]]
+          mountpoint = "/"
+          minsize = "10 GiB"
+          EOF
+
       - name: Podman Bootc image builder
         run: |
 
@@ -40,7 +53,7 @@ jobs:
               --security-opt label=type:unconfined_t \
               -v ./config.toml:/config.toml:ro \
               -v ./output:/output \
-              -v /var/lib/containers/storage:/var/lib/containers/storage \
+              #-v /var/lib/containers/storage:/var/lib/containers/storage \
               quay.io/centos-bootc/bootc-image-builder:latest \
               --type qcow2 \
             --use-librepo=True \
