@@ -25,6 +25,9 @@ jobs:
           podman --version
           pwd
           ls -ltra
+          ls -ltra /var
+          ls -ltra /var/lib
+          ls -ltra /var/lib/containers
 
       - name: Create ISO configuration
         run: |
@@ -43,9 +46,9 @@ jobs:
         run: |
 
           # Ensure the image is fetched
-          podman pull quay.io/centos-bootc/centos-bootc:stream9
+          sudo podman pull quay.io/centos-bootc/centos-bootc:stream9
           mkdir output
-          podman run \
+          sudo podman run \
               --rm \
               -it \
               --privileged \
