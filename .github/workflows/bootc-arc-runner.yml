@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: bootc-runner-scale-set
     container:
-     image: busybox
+     image: ubuntu:22.04
        #options: --privileged
     permissions:
       contents: read
