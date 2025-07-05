@@ -31,7 +31,7 @@ jobs:
         uses: osbuild/bootc-image-builder-action@v0.0.2
         with:
           config-file: ./iso-config.toml
-          image: quay.io/konflux-fedora/bootc-tenant/fedora-bootc-42-minimal:latest
+          image: quay.io/bootc-devel/fedora-bootc-42-minimal:latest
           types: |
             iso
 
