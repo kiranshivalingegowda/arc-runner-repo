@@ -9,7 +9,7 @@ on:
 
 jobs:
   say_hello:
-    runs-on:  demo-dind-runner
+    runs-on: bootc-runner-scale-set
 
     steps:
     - name: Checkout repository
