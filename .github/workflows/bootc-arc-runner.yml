@@ -13,7 +13,7 @@ jobs:
     container:
       #image: ubuntu:22.04
       image: quay.io/podman/stable:latest
-      options: --privileged
+        #options: --privileged
     permissions:
       contents: read
       packages: write
@@ -22,11 +22,8 @@ jobs:
 
       - name: Podman Validation
         run: |
-          podman --version
+          sudo podman --version
           pwd
-          ls -ltra
-          ls -ltra /var
-          ls -ltra /var/lib
           ls -ltra /var/lib/containers
 
       - name: Create ISO configuration
