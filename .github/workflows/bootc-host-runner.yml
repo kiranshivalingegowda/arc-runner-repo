@@ -1,0 +1,28 @@
+name: Bootc VM
+
+on:
+  push:
+    branches: none # [ main ]
+  pull_request:
+    branches: none # [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: bootc-vm-runner
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create ISO configuration
+        run: |
+          cat > config.toml << EOF
+          [[customizations.user]]
+          name = "admin"
+          password = "welcome"
+          groups = ["wheel"]
+
+          [[customizations.filesystem]]
+          mountpoint = "/"
+          minsize = "10 GiB"
+          EOF
+
